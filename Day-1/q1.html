@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Day 1 Q. 1</title>
+    </head>
+    <body>
+        <h1>JavaScript console methods</h1>
+        <p>The JavaScript console can be used to display output from one's JavaScript code. This can be used for logging information, and especially useful for debugging.</p>
+        <p>The console object comes with various methods to log different types of information.</p>
+        <p><code>console.log()</code>: This is useful for general logging of information to the console. It will accept any type of variable passed to it as a parameter.</p>
+        <p><code>console.info()</code>: For logging informative text. The output is printed to indicate this.</p>
+        <p><code>console.warn()</code>: For logging warnings (such as non-critical errors that need to be brought to attention). The output is printed with a warning label and colour.</p>
+        <p><code>console.error()</code>: For logging errors (such as more severe problems that might prevent the code from running correctly). The output is printed with an error label and colour.</p>
+        <p><code>console.table()</code>: This is useful for logging tabular data, that can be passed to this method in the form of an array or an object.</p>
+        <p><code>console.time()</code> and <code>console.timeEnd()</code>: These methods can be used to run a timer. Used together, they will log the time it takes to execute one or more JavaScript statements between the start and end of the timer methods.</p>
+        <p>Please look at the console output now to see examples of running all these console methods</p>
+        
+        <script>
+            console.time(); // Start a timer
+            console.log("This is the JavaScript console");
+            console.info("This is some informative text");
+            console.warn("A warning has been generated");
+            console.error("An error has been generated");
+            console.table({'Day': 1, 'Questions': 3}); // An object is passed, which is printed in a tabular form
+            console.timeEnd(); // The timer is stopped, and the time taken to execute the code above is printed to the console
+        </script>
+    </body>
+</html>

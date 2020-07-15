@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Day 1 Q. 2</title>
+    </head>
+    <body>
+        <h1>var, let, and const</h1>
+        <p>JavaScript variables can be declared via the <code>var</code>, <code>let</code>, and <code>const</code> keywords. The latter two were introduced into the language with ES6</p>
+        <p><code>var</code>: Variables declared with <code>var</code> are global in scope. They can be declared anywhere in the code, and they can be re-declared, as well as their values can be modified.</p>
+        <p><code>let</code>: Variables declared with <code>let</code> have a block scope, (i.e., code enclosed in braces {}). Like with <code>var</code>, their value can be modified, but the variables cannot be redeclared within the same scope, and trying to do so will generate an error.</p>
+        <p><code>const</code>: Variables declared with <code>const</code> also have a block scope. In addition, they can neither be redeclared, nor can their values be modified.</p>
+        <table>
+            <tr>
+                <th>Declaration type</th>
+                <th>Scope</th>
+                <th>Can be re-declared</th>
+                <th>Value can be changed</th>
+            </tr>
+            <tr>
+                <td>var</td>
+                <td>Global</td>
+                <td>Yes</td>
+                <td>Yes</td>
+            </tr>
+            <tr>
+                <td>let</td>
+                <td>Block</td>
+                <td>No</td>
+                <td>Yes</td>
+            </tr><tr>
+                <td>const</td>
+                <td>Block</td>
+                <td>No</td>
+                <td>No</td>
+            </tr>
+        </table>
+        <p>The sample JavaScript code in this file illustrates these different types of variable declarations (check console for output).</p>
+
+        <script>
+            var a = "Hello";    // A var declaration
+            let b = "Hi";       // A let declaration
+            console.log("a: ", a);
+            console.log("b: ", b);
+
+            // Start of a code block
+            {
+                console.info("Declaration within a block")   
+                var a = "Hello again";  // Redeclaration of globally scoped variable a
+                let b = "Hi again";     // Declaration of variable b in a block scope 
+                console.log("a: ", a);
+                console.log("b: ", b);
+            }
+
+            console.info("Globally scoped variables")
+            console.log("a: ", a); // As a has global scope, redeclaration within the block has changed its value
+            console.log("b: ", b); // As b has block scope, The variable declared outside the block is independent of the one declared within
+
+            const c = "I cannot be changed";    // A constant variable declration
+            console.log("c: ", c);
+            c = "Changed constant"              // This will generate an assignment error
+        </script>
+    </body>
+</html>
