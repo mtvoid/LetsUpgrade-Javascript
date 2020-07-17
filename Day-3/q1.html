@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 3 Q. 1</title>
+</head>
+<body>
+    <script>
+        let input = prompt("Enter a number:");
+        let number = parseInt(input);
+        if (!isNaN(number)) {
+            let result = oddeven(number);
+            console.log(`The number entered is ${number} and it is ${result}`);
+        }
+        else {
+            console.log("No valid number entered");
+        }
+
+        function oddeven(number) {
+            if (number % 2 == 0) {
+                return "even";
+            }
+            else {
+                return "odd";
+            }
+        }
+    </script>
+</body>
+</html>
