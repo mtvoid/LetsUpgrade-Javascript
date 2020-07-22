@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 4 Q. 5</title>
+</head>
+<body>
+    <script>
+        let sales, commission = 0;
+        sales = parseInt(prompt("Enter the sales figure for the month:"));
+        console.log("Yearly sales:", sales);
+
+        // Array consisting of slabs in descending order
+        let slabs = [ 
+            {above: 20000, rate: 10},
+            {above: 10000, rate: 7},
+            {above: 5000,  rate: 5},
+            {above: 0,     rate: 2}
+        ];
+
+        let amount = sales;
+
+        for (slab of slabs) {
+            if (amount > slab.above) {
+                commission += (amount - slab.above ) * slab.rate/100;
+                amount = slab.above;
+            }
+        }
+
+        console.log("Commission earned: ", commission);
+    </script>
+</body>
+</html>

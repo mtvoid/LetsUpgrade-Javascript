@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 4 Q. 4</title>
+</head>
+<body>
+    <!-- Simple calculator in JavaScript -->
+    <table>
+        <tr>
+            <td colspan="4"><input id = "disp" type="text" style="text-align: right;" readonly></td>
+        </tr>
+        <tr>
+            <td><button onclick="buttonPress('C')">C</button></td>
+            <td><button onclick="buttonPress('p')">%</button></td>
+            <td><button onclick="buttonPress('r')">√</button></td>
+            <td><button onclick="buttonPress('d')">÷</button></td>
+        </tr><tr>
+            <td><button onclick="buttonPress('7')">7</button></td>
+            <td><button onclick="buttonPress('8')">8</button></td>
+            <td><button onclick="buttonPress('9')">9</button></td>
+            <td><button onclick="buttonPress('m')">×</button></td>
+        </tr>
+        <tr>
+            <td><button onclick="buttonPress('4')">4</button></td>
+            <td><button onclick="buttonPress('5')">5</button></td>
+            <td><button onclick="buttonPress('6')">6</button></td>
+            <td><button onclick="buttonPress('s')">-</button></td>
+        </tr>
+        <tr>
+            <td><button onclick="buttonPress('1')">1</button></td>
+            <td><button onclick="buttonPress('2')">2</button></td>
+            <td><button onclick="buttonPress('3')">3</button></td>
+            <td><button onclick="buttonPress('a')">+</button></td>
+        </tr>
+        <tr>
+            <td colspan="2"><button style="display: block; width: 100%" onclick="buttonPress('0')">0</button></td>
+            <td><button onclick="buttonPress('.')">.</button></td>
+            <td><button onclick="buttonPress('e')">=</button></td>
+        </tr>
+    </table>
+
+    <script>
+        // JavaScript code to implement a simple calculator (with DMAS precedence)
+        let op = [], num = [];
+        current = "";
+
+        // Catch each button press and perform the appropriate action
+        function buttonPress(input) {
+            console.log(input," was pressed");
+            console.log("Before:", current, num, op);
+
+            let result;
+
+            switch (input) {
+                case 'C':           // Reset the calculator
+                    current = "";
+                    num = [];
+                    op = [];
+                    break;
+       
+                case '1':
+                case '2':
+                case '3':
+                case '4':
+                case '5':
+                case '6':
+                case '7':
+                case '8':
+                case '9':
+                case '0':
+                case '.':
+                    current += input;
+                    break;
+
+                case 'e':
+                    numPush();
+                    while (op.length > 0) binaryOp();
+                    current = String(num.pop());                    
+                    break;
+
+                case 'a':
+                    numPush();
+                    while (num.length > 1 && op.length > 0) binaryOp();
+                    if (op.length == 0) op.push('a');
+                    break;
+
+                case 's':
+                    numPush();
+                    while (num.length > 1 && op.length > 0) binaryOp();
+                    if (op.length == 0) op.push('s');
+                    break;
+
+                case 'm':
+                    numPush();
+                    if (num.length>1) {
+                        if (op.slice(-1) == 'a' || op.slice(-1) == 's') {
+                            op.push('m');
+                        } 
+                        else {
+                            binaryOp();
+                            op.push('m');
+                        }
+                    }
+                    if (op.length == 0) op.push('m');                        
+                    break;
+
+                case 'd':
+                    numPush();
+                    if (num.length>1) {
+                        if (op.slice(-1) == 'a' || op.slice(-1) == 's') {
+                            op.push('d');
+                        } 
+                        else {
+                            binaryOp();
+                            op.push('d');
+                        }
+                    }
+                    if (op.length == 0) op.push('d');                        
+                    break;
+
+                case 'p':
+                    numPush();
+                    result = num.pop()/100;
+                    num.push(result);
+                    break;
+
+                case 'r':
+                    numPush();
+                    result = Math.sqrt(num.pop());
+                    num.push(result);
+                    break;
+
+                default:
+                    break;
+            }
+            display();
+            console.log("After: ", current, num, op);
+        }
+
+        // Push input value into operand stack
+        function numPush() {
+            if (current) {
+                num.push(Number(current));
+                current = "";
+            }
+        }
+
+        // Evaluate binary operation on last two values
+        function binaryOp() {
+            let o = op.pop();
+            switch (o) {
+                case 'a':
+                    num.push(num.pop()+num.pop());
+                    break;
+                case 'm':
+                    num.push(num.pop()*num.pop());
+                    break;
+                case 's':
+                    num.push(-num.pop()+num.pop());
+                    break;
+                case 'd':
+                    num.push(1/num.pop()*num.pop());
+                    break;
+            }
+        }
+
+        // Update the output value in the display
+        function display() {
+            let output = current ? current : String(num.slice(-1));
+            document.getElementById("disp").value=output;
+        }
+    </script>
+</body>
+</html>

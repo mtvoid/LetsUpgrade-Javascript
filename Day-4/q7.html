@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 4 Q. 7</title>
+</head>
+<body>
+    <script>
+        // Prints prime numbers up to a given value (using the method of the Sieve of Eratosthenes)
+        
+        let n = parseInt(prompt("Enter a number n"));
+
+        let pmask = new Array(n+1).fill(true); // Initialise array to identify primes
+
+        for (let i = 2; i*i <= n; i++) {
+            if (pmask[i]) {
+                for (let j = i*i; j <= n; j += i) {
+                    pmask[j] = false;
+                }                
+            }
+        }
+
+        // Once the primes have been identified, create an array with the actual numbers
+        let primes = Array.from(Array(n), (e,i) => i).filter((e,i) => pmask[i]).splice(2);
+
+        console.log(`Prime numbers up till ${n}:`);
+        console.log(primes.join());
+    
+    </script>
+</body>
+</html>
