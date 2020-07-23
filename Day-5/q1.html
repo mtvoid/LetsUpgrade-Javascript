@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 5 Q. 1</title>
+</head>
+<body>
+    <script>
+        let n = parseInt(prompt("Enter a positive number"));
+        console.log("Creating an array of numbers from 1 to", n);
+        let a = Array(n).fill().map((e,i) => i+1);
+        console.log(a);
+        console.log("Filtered array with only odd numbers");
+        let odds = a.filter(e => e%2 == 1);
+        console.log(odds);
+        console.log("Cube of the numbers in filtered array");
+        let cubes = odds.map(e => Math.pow(e,3));
+        console.log(cubes);
+    </script>
+</body>
+</html>

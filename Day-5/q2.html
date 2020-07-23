@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 5 Q. 2</title>
+</head>
+<body>
+    <script>
+        // Class demonstration in JavaScript
+
+        class User {
+            constructor(name,age,email) {
+                this.category = "User";
+                this.name = name;
+                this.age = age;
+                this.email = email;
+                this.coins = 0;
+                this.courses = [];
+            }
+
+            login() {
+                console.log(`${this.name} (${this.category}) has logged in.`);
+                return this;
+            }
+
+            logout() {
+                console.log(`${this.name} (${this.category}) has logged out.`);
+                return this;
+            }
+
+            info () {
+                console.log("Name:\t", this.name);
+                console.log("Age:\t", this.age);
+                console.log("E-mail:\t", this.email);
+                console.log("Account type: ", this.category);
+                console.log("Coin balance:", this.coins);
+                console.log("Courses:", this.courses.join());
+            }
+        }
+
+        class Moderator extends User {
+            constructor(...args) {
+                super(...args);
+                this.category = "Moderator"
+            }
+
+            addCoin(user, n=1) {
+                user.coins += n;
+                console.log(`Added ${n} coin${n==1?'':'s'}. ${user.name}'s coin balance is ${user.coins}.`);
+                return user.coins;
+            }
+
+            delCoin(user, n=1) {
+                this.coins -= n;
+                console.log(`Removed ${n} coin${n==1?'':'s'}. ${user.name}'s coin balance is ${user.coins}.`);
+                return user.coins;
+            }
+        }
+
+        class Admin extends Moderator {
+            constructor(...args) {
+                super(...args);
+                this.category = "Admin";
+            }
+
+            addCourse(user, course) {
+                user.courses.push(course);
+                console.log(`${course} added to ${user.name}'s list of courses.`);
+                return user.courses;
+            }
+
+            delCourse(user, course) {
+                let i = user.courses.indexOf(course);
+                if(i != -1) {
+                    user.courses.splice(i,1);
+                    console.log(`${course} removed from ${user.name}'s list of courses.`);
+                }
+                else console.log(`User ${user.name} not registered for this course.`);
+                return user.courses;
+            }
+        }
+
+            // Some example code
+            let user1 = new User("Anjali", 25, "anjali@letsupgrade.in");
+            let user2 = new Moderator("Mallika", 26, "mallika@letsupgrade.in");
+            let user3 = new Admin("Siddharth", 35, "sid@letsupgrade.in");
+            
+            user1.login();
+            user1.info();
+            user1.logout();
+
+            user2.addCoin(user1);
+            user2.addCoin(user2,5);
+            user2.delCoin(user2);
+            user2.info();
+            
+            user3.addCourse(user1,"JavaScript");
+            user3.addCourse(user1,"Python");
+            user3.delCourse(user1,"JavaScript");
+            user3.delCourse(user1,"Java");
+            user1.info();
+        
+    </script>
+</body>
+</html>
