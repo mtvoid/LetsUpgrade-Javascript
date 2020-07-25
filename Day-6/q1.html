@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 6 Q. 1</title>
+</head>
+<body>
+    <h1 style="text-align: center">Colours!</h1>
+
+    <script>
+        let colors = ['red','orange','yellow','green','cyan','blue','violet'];
+        let i = 0;
+        
+        setInterval(changeBgColor,5000);    // Change background colour every five seconds
+        
+        function changeBgColor() {
+            document.body.style.backgroundColor=colors[i];  // Change background colour
+            i = i == colors.length - 1 ? 0 : i + 1; // Cycle to the next index in the array
+        }
+    </script>
+</body>
+</html>

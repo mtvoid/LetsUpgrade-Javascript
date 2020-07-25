@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 6 Q. 2</title>
+    <style>
+        #multTable {
+            border: 1px solid black;
+        }
+        #multTable tr:nth-child(even) {
+            background-color: lightgray;
+        }
+    </style>
+</head>
+<body>
+    <table id="multTable">
+    </table>
+
+    <script>
+        let n = parseInt(prompt("Enter a number"));
+        let table = document.getElementById('multTable');
+        let row;
+        let text = "";
+
+        table.innerHTML=`<caption>Multiplication table of ${n}:</caption>`;
+
+        //  Prints a multiplication of given number till 20
+
+        for (let i = 1; i <= 20; i++) {
+            text = `${n} × ${i} = ${n*i}`;  // Compute the product
+            row = document.createElement("tr");
+            row.appendChild(document.createTextNode(text));
+            table.appendChild(row);        // Add the line to the table            
+        }
+    </script>
+</body>
+</html>

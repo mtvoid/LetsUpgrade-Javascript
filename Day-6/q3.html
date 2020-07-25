@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 6 Q. 3</title>
+
+    <style>
+        .darkMode {
+            color: white;
+            background-color: black;
+        }
+
+        #welcome {
+            text-align:center;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <input type="checkbox" onclick="toggleDark()">Dark Mode</input>
+    <h1 id="welcome">Welcome, <span id="name"></span>. The current time is <span id="clock"></span></h1>
+
+    <script>
+        let name = prompt("Hi! What shall I call you?");
+        document.getElementById("name").innerText = name;
+
+        // Display the current time
+        function clock() {
+            let date = new Date();
+            document.getElementById("clock").innerText = date.toLocaleTimeString();
+        }
+
+        clock();
+     
+        // We are now ready to display the welcome text
+        document.getElementById("welcome").style.display = "block";
+
+        // Update the clock every second
+        setInterval(clock, 1000);
+
+        function toggleDark() {
+            document.body.classList.toggle("darkMode");
+        }
+    </script>
+</body>
+</html>
