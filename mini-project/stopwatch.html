@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Project - Stopwatch</title>
+
+    <style>
+        div {
+            display: flex;
+            text-align: center;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5em;
+        }
+
+        .display {
+            font-family: sans-serif;
+            font-size: 5em;
+            background-color: white;
+            color: black;
+            border-color: black;
+            border-style:solid;
+            border-width:thick;
+            border-radius: 0.3em;
+        }
+
+        .timeout {
+            color: white;
+            background-color: red;
+        }
+
+        input[type="number"] {
+            width: 2em;
+        }
+    </style>
+</head>
+<body>
+    <div><input type="number" id="minutes" placeholder="m" min="0"></input>:<input type="number" id="seconds" placeholder="s" min="0" max="59"></input></div>
+    <div><input type="button" id="stBtn" value="Start" onclick="startstop()"></input><input type="button" id="resetBtn" value="Reset" onclick="reset()"></input></div>
+    <div><span class="display" id="timeDisp">0:00.00</span></div>
+    
+    <script>
+        let running = false;
+        let updateTimer;
+        let timer, startTime;
+
+        // DOM elements
+        let minutes = document.getElementById("minutes");
+        let seconds = document.getElementById("seconds");
+        let stBtn = document.getElementById("stBtn");
+        let resetBtn = document.getElementById("resetBtn");
+        let timeDisp = document.getElementById("timeDisp");
+
+        // Read the timer value from the number input fields
+        function getTimer() {
+            let t = (parseInt(minutes.value)*60 + parseInt(seconds.value)) * 1000;
+            console.log(t);
+            return isNaN(t) ? 0 : t;
+        }
+
+        // Reset the stopwatch to original state
+        function reset() {
+            timeDisp.innerText="0:00.00";
+            minutes.value = 0;
+            seconds.value = 0;
+            minutes.disabled = false;
+            seconds.disabled = false;
+            timeDisp.classList.remove("timeout");
+        }
+
+        // Start or stop the stopwatch according to the running state
+        function startstop() {
+            if (getTimer()==0) {
+                alert("Set the timer to a value greater than 0");
+            }
+            else {
+                if (!running) {
+                    timer = getTimer();
+                    startTime = performance.now();
+                    updateTimer = setInterval(update,20);    // Update display every 20 milliseconds
+                    stBtn.value = "Stop";
+                    timeDisp.classList.remove("timeout");
+                    resetBtn.disabled = true;
+                    minutes.disabled = true;
+                    seconds.disabled = true;
+                    running = true;
+                }
+                else {
+                    clearInterval(updateTimer);
+                    stBtn.value = "Start";
+                    resetBtn.disabled = false;
+                    running = false;
+                }
+            }
+        }
+
+        // Callback function for the timer to update the display
+        function update() {
+            let time = performance.now() - startTime;
+            if (time > timer) {
+                timeDisp.classList.add("timeout");         
+            }
+
+            time = parseInt(time / 10); // Time since start in centiseconds
+            let cs = time % 6000;
+            let m = (time - cs) / 6000;
+            
+            timeDisp.innerText = String(m) + ":" + (cs/100).toFixed(2).padStart(5,'0');
+        }
+    </script>
+</body>
+</html>
